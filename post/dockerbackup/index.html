@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.maxlu.top/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="记录——为了更好的掌握！"><meta charset="UTF-8"><title>Docker文件夹自动备份至Telegram | MrLu&#39;s Blog</title>
+<link href="https://blog.maxlu.top/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://blog.maxlu.top/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.maxlu.top/post/dockerbackup/" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.maxlu.top"><img alt="logo" style="display:inline-block;" src="https://blog.maxlu.top/images/avatar.png"/></a><h1 title="MrLu&#39;s Blog" class="weaklink"><a  href="/">MrLu&#39;s Blog</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/Lzc86obpj" class="selected active current nav__item" >读书</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/MxvDi2jJa" class="selected active current nav__item" >观影</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/S6UjJXUoT" class="selected active current nav__item" >健身</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/Lzc86obpj" class="selected active current nav__item" >读书</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/MxvDi2jJa" class="selected active current nav__item" >观影</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/S6UjJXUoT" class="selected active current nav__item" >健身</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1711551569070" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>Docker文件夹自动备份至Telegram</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2023-07-18</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.maxlu.top/tag/SXPc6IA3I/" class="tag">备份</a> | 	<a href="https://blog.maxlu.top/tag/iQwMvsELEU/" class="tag">电报</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">942字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">5 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://photo.maxlu.top/i/2023/07/18/yrhjuy.webp" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h1 id="由来">由来</h1>
+<p>使用的VPS一直都是大厂的免费主机，所以一直有一个担忧，就是数据安全与备份。<br>
+之前利用ChatGPT撰写了一个自动备份并传到谷歌云盘的脚本，不过最近谷歌收紧了政策，一直备份失败。</p>
+<h1 id="脚本内容">脚本内容</h1>
+<p>考虑到Telegram的特殊性，于是修改了脚本内容。</p>
+<pre><code>#!/bin/bash
+
+# 设置参数
+backup_dir=&quot;/root/data/docker_data&quot;
+telegram_bot_token=&quot;60000:AAAAAjj4&quot;
+telegram_chat_id=&quot;561119&quot;
+log_file=&quot;/root/backup/backup.log&quot;
+
+
+# 获取当前日期
+current_date=$(date +%Y%m%d)
+echo &quot;[$current_date] 开始备份&quot; &gt;&gt; &quot;$log_file&quot;
+
+
+# 压缩备份文件夹
+backup_filename=&quot;backup_$(date +%Y%m%d).tar.gz&quot;
+if ! tar -czf &quot;$backup_filename&quot; &quot;$backup_dir&quot; &gt; /dev/null 2&gt;&amp;1; then
+  echo &quot;[$current_datetime] 备份失败&quot; &gt;&gt; &quot;$log_file&quot;
+  message=&quot;备份失败：$backup_filename&quot;
+  curl -s -X POST &quot;https://api.telegram.org/bot$telegram_bot_token/sendMessage&quot; \
+    -d chat_id=&quot;$telegram_chat_id&quot; \
+    -d text=&quot;$message&quot;
+  exit 1
+fi
+
+# 分割备份文件为较小的部分
+split -b 40M &quot;$backup_filename&quot; &quot;$backup_filename.part&quot;
+
+# 逐个发送分割的备份文件到 Telegram
+for part_file in &quot;$backup_filename&quot;.part*; do
+  upload_result=$(curl -s -F chat_id=&quot;$telegram_chat_id&quot; -F document=@&quot;$part_file&quot; &quot;https://api.telegram.org/bot$telegram_bot_token/sendDocument&quot;)
+
+  # 检查上传结果
+  if [[ $(echo &quot;$upload_result&quot; | jq -r '.ok') != &quot;true&quot; ]]; then
+    echo &quot;[$current_datetime] 备份文件发送到 Telegram 失败&quot; &gt;&gt; &quot;$log_file&quot;
+    exit 1
+  fi
+
+  # 提取文件信息
+  file_name=$(basename &quot;$part_file&quot;)
+  message=&quot;已完成备份：$file_name&quot;
+  curl -s -X POST &quot;https://api.telegram.org/bot$telegram_bot_token/sendMessage&quot; \
+    -d chat_id=&quot;$telegram_chat_id&quot; \
+    -d text=&quot;$message&quot;
+done
+
+
+# 发送备份情况到 Telegram
+echo &quot;[$current_datetime] 已完成备份：$backup_filename&quot; &gt;&gt; &quot;$log_file&quot;
+message=&quot;已完成备份：$backup_filename&quot;
+curl -s -X POST &quot;https://api.telegram.org/bot$telegram_bot_token/sendMessage&quot; \
+  -d chat_id=&quot;$telegram_chat_id&quot; \
+  -d text=&quot;$message&quot;
+
+
+
+# 删除分割的备份文件
+rm &quot;$backup_filename&quot;.part*
+rm &quot;$backup_filename&quot;
+
+</code></pre>
+<p>这个脚本的特别之处在于，它会将压缩后的备份文件拆为多个part文件（主要是电报API限制单文件不能超过50MB），然后通过Bot发送至Telegram。</p>
+<h1 id="取回与合并">取回与合并</h1>
+<p>通过电报客户端将part文件下载回本地（也可以不用管，毕竟Telegram永久存储），然后通过脚本合并成完整文件。</p>
+<p>下面是合并part文件的脚本： <code>merge_backup.ps1</code></p>
+<pre><code>chcp 65001
+
+# 获取当前日期和时间
+$currentDate = Get-Date -Format &quot;yyyyMMdd&quot;
+
+# 获取当前目录下的所有分割文件
+$partFiles = Get-ChildItem -Filter &quot;*.part*&quot; | Sort-Object Name
+
+# 生成合并后的备份文件名
+$backupFilename = &quot;$currentDate.tar.gz&quot;
+
+# 创建空的备份文件
+New-Item -ItemType File $backupFilename -Force | Out-Null
+
+$totalFiles = $partFiles.Count
+$processedFiles = 0
+
+# 逐个读取分割文件内容，并写入到合并后的备份文件中
+foreach ($partFile in $partFiles) {
+    $processedFiles++
+    
+    $progressMessage = &quot;Merging split files {0} / {1}&quot; -f $processedFiles, $totalFiles
+    Write-Progress -Activity &quot;Merge backup files&quot; -Status $progressMessage -PercentComplete ($processedFiles / $totalFiles * 100)
+
+    $partContent = Get-Content $partFile.FullName -Encoding Byte -ReadCount 0
+    Add-Content -Path $backupFilename -Value $partContent -Encoding Byte
+}
+
+# 删除分割的部分文件
+Remove-Item $partFiles -Force
+
+# 输出合并完成的信息
+Write-Host &quot;Backup file merge completed：$backupFilename&quot;
+
+</code></pre>
+<h1 id="使用说明">使用说明</h1>
+<p>将 <code>merge_backup.ps1</code> 文件放入parts文件夹中<br>
+右键，使用PowerShell运行</p>
+<figure data-type="image" tabindex="1"><img src="https://photo.maxlu.top/i/2023/07/18/xxxix2.webp" alt="" loading="lazy"></figure>
+<h1 id="总结">总结</h1>
+<p>此方案的优点在于</p>
+<ul>
+<li>自动备份Docker文件夹等其他在远程服务器上的重要数据；</li>
+<li>借助Telegram无限存储的优势，不用考虑备份盘的大小，且方便取回。</li>
+</ul>
+<p>当然也有不足</p>
+<ul>
+<li>Telegram前端API限制单文件不能大于50MB，如果需要备份的文件太大，就会被拆分成很多个小part；</li>
+<li>随之而来的就是，需要一个个另存到文件夹，然后运行脚本进行合并。</li>
+</ul>
+<p>然而，数据无价嘛，就算麻烦点，也值得。</p>
+<p>相应的，可以减少备份频率；</p>
+<p>例如，通过crontab设置每10天备份一次。</p>
+<pre><code>crontab -e
+0 0 */10 * * /root/backup/bback.sh
+</code></pre>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E7%94%B1%E6%9D%A5">由来</a></li>
+<li><a href="#%E8%84%9A%E6%9C%AC%E5%86%85%E5%AE%B9">脚本内容</a></li>
+<li><a href="#%E5%8F%96%E5%9B%9E%E4%B8%8E%E5%90%88%E5%B9%B6">取回与合并</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">使用说明</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"d0daf7e54e998a449b14",clientSecret:"c50102f10b18bacd88feb38adb6299f17963b862",repo:"mrlu997.github.io",owner:"mrlu997",admin:["mrlu997"],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script>
+	  
+		  
+	  
+
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+</script>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/mrlu997"title="github"><i class="iconfont icon-github"></i></a><a href="/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright"><footer>
+  <p>博客成立于 <span id="blog-establish-date"></span></p>
+</footer>
+
+<script>
+  // 获取当前日期
+  var currentDate = new Date();
+  
+  // 设置博客成立日期（假设为2020年1月1日）
+  var establishDate = new Date("2023-07-17");
+  
+  // 计算博客成立的天数
+  var daysSinceEstablishment = Math.floor((currentDate - establishDate) / (1000 * 60 * 60 * 24));
+  
+  // 显示博客成立时间
+  document.getElementById("blog-establish-date").textContent = establishDate.toLocaleDateString() + "（已运行 " + daysSinceEstablishment + " 天）";
+</script>Copyright © 2023- <a href="https://blog.maxlu.top" style="margin:0;">MrLu&#39;s Blog</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>27</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://blog.maxlu.top/media/js/prism.js"></script>
+</body>
+</html>
