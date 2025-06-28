@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.maxlu.top/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="记录——为了更好的掌握！"><meta charset="UTF-8"><title>Gridea博客部署Gitalk评论程序 | MrLu&#39;s Blog</title>
+<link href="https://blog.maxlu.top/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://blog.maxlu.top/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.maxlu.top/post/Gitalkk/" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.maxlu.top"><img alt="logo" style="display:inline-block;" src="https://blog.maxlu.top/images/avatar.png"/></a><h1 title="MrLu&#39;s Blog" class="weaklink"><a  href="/">MrLu&#39;s Blog</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/Lzc86obpj" class="selected active current nav__item" >读书</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/MxvDi2jJa" class="selected active current nav__item" >观影</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/S6UjJXUoT" class="selected active current nav__item" >健身</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/Lzc86obpj" class="selected active current nav__item" >读书</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/MxvDi2jJa" class="selected active current nav__item" >观影</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tag/S6UjJXUoT" class="selected active current nav__item" >健身</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1751084516902" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>Gridea博客部署Gitalk评论程序</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2023-07-18</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.maxlu.top/tag/iTi2jRZ86/" class="tag">教程</a> | 	<a href="https://blog.maxlu.top/tag/dW0uu7S-5/" class="tag">Gitalk</a> | 	<a href="https://blog.maxlu.top/tag/W8fR-PJLQQ/" class="tag">评论系统</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1225字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">7 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://photo.maxlu.top/i/2023/07/18/igpcqz.webp" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>Gridea博客部署Gitalk评论程序</p>
+<h1 id="前情提要">前情提要</h1>
+<p>我应用的主题是<code>bitcron-pro</code>，在<code>bitcron-pro\templates\_blocks</code>文件夹中，存在一个<code>gitalk.ejs</code>文件。<br>
+用Notepad++打开文件，可以发现它引用了2个外部文件</p>
+<pre><code>https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js
+
+https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css
+</code></pre>
+<p>在浏览器中打开JS文件，搜索proxy可以发现，其应用了</p>
+<pre><code>https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://photo.maxlu.top/i/2023/07/18/ig6aot.webp" alt="" loading="lazy"></figure>
+<p>据说这是一个开源框架，解决跨域问题而生的反向代理。</p>
+<p>如今，这个网址已经打不开了，从而导致Gitalk评论系统403错误。</p>
+<h1 id="解决办法">解决办法</h1>
+<p>既然发现了问题，那么解决办法也就有了，要么换掉proxy，要么直接换掉引用的外部JS和CSS文件。</p>
+<p>万一不只是proxy失效的话，岂不是还要折腾，干脆把JS和CSS都换掉算了。</p>
+<p>于是检索到一个可用的外部JS和CSS</p>
+<pre><code>gitalk.ejs文件内容
+
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css&quot;&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;
+&lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+      var gitalk = new Gitalk({
+        clientID: '&lt;%= theme.gitalk.ClientID %&gt;',
+        clientSecret: '&lt;%= theme.gitalk.ClientSecret %&gt;',
+        repo: '&lt;%= theme.gitalk.repo %&gt;',
+        owner: '&lt;%= theme.gitalk.owner %&gt;',
+        admin: '&lt;%= theme.gitalk.adminUser %&gt;',
+        id: &lt;%= theme.gitalk.ID %&gt;,
+        labels: '&lt;%= theme.gitalk.labels %&gt;'.split(',').filter(l =&gt; l),
+        perPage: &lt;%= theme.gitalk.perPage %&gt;,
+        pagerDirection: '&lt;%= theme.gitalk.pagerDirection %&gt;',
+        createIssueManually: &lt;%= theme.gitalk.createIssueManually %&gt;,
+        distractionFreeMode: &lt;%= theme.gitalk.distractionFreeMode %&gt;
+      })
+      gitalk.render('gitalk-container')
+&lt;/script&gt;
+</code></pre>
+<p>这是一个完整的gitalk.ejs文件，没敢直接用，只是采用了它的JS和CSS文件。更新后，Gitalk可用！</p>
+<h1 id="后记">后记</h1>
+<p>以下内容来自</p>
+<h2 id="配置gitalk评论系统"><a href="https://yuanlichenai.cn/2020/01/16/Gitalk/#%E9%85%8D%E7%BD%AEgitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">配置gitalk评论系统</a></h2>
+<h3 id="增加gitalkejs文件">增加gitalk.ejs文件</h3>
+<p>在<code>themes\Chic\layout\_plugins</code>中新建<code>gitalk.ejs</code>文件，内容如下：</p>
+<pre><code>gitalk.ejs&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css&quot;&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;
+&lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+      var gitalk = new Gitalk({
+        clientID: '&lt;%= theme.gitalk.ClientID %&gt;',
+        clientSecret: '&lt;%= theme.gitalk.ClientSecret %&gt;',
+        repo: '&lt;%= theme.gitalk.repo %&gt;',
+        owner: '&lt;%= theme.gitalk.owner %&gt;',
+        admin: '&lt;%= theme.gitalk.adminUser %&gt;',
+        id: &lt;%= theme.gitalk.ID %&gt;,
+        labels: '&lt;%= theme.gitalk.labels %&gt;'.split(',').filter(l =&gt; l),
+        perPage: &lt;%= theme.gitalk.perPage %&gt;,
+        pagerDirection: '&lt;%= theme.gitalk.pagerDirection %&gt;',
+        createIssueManually: &lt;%= theme.gitalk.createIssueManually %&gt;,
+        distractionFreeMode: &lt;%= theme.gitalk.distractionFreeMode %&gt;
+      })
+      gitalk.render('gitalk-container')
+&lt;/script&gt;
+</code></pre>
+<h3 id="引入gitalk">引入gitalk</h3>
+<p>在<code>themes\Chic\layout\post.ejs</code>文件中添加：</p>
+<pre><code>&lt;% if (theme.gitalk.enable) { %&gt;
+    &lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;
+    &lt;%- partial('_plugins/gitalk') %&gt;
+&lt;% } %&gt;
+</code></pre>
+<h2 id="配置_configyml">配置_config.yml</h2>
+<h3 id="获取client_id-和-client_secret">获取client_id 和 client_secret</h3>
+<p>首先创建一个OAuth application应用，地址https://github.com/settings/applications/new<br>
+<img src="https://yuanlichenai.cn/2020/01/16/Gitalk/2020-02-02-17-28-33.png" alt="img" loading="lazy"><br>
+<img src="https://yuanlichenai.cn/2020/01/16/Gitalk/2020-02-02-17-34-57.png" alt="img" loading="lazy"></p>
+<h3 id="在主题_configyml中添加配置">在主题<code>_config.yml</code>中添加配置</h3>
+<pre><code>gitalk:
+  enable: true
+  ClientID: xxxxx #Client ID,填入上一步获取的ID
+  ClientSecret: xxxxxxxxxx #Client Secret，填入上一步获取的ID
+  repo: blog #你要存放的项目名,如果博客部署在github可以放一起
+  owner: YuanLiChenAi #这个项目名的拥有者（GitHub账号或组织）
+  adminUser: ['YuanLiChenAi'] #管理员用户
+  ID: location.pathname #页面ID
+  labels: ['Gitalk'] #GitHub issues的标签
+  perPage: 10 #每页多少个评论
+  pagerDirection: last #排序方式是从旧到新（first），还是从新到旧（last）
+  createIssueManually: true #是否自动创建isssue，自动创建需要当前登录的用户为adminuser
+  distractionFreeMode: false #是否启用快捷键(cmd|ctrl + enter) 提交评论
+</code></pre>
+<blockquote>
+<p>注意，文章url中不能有中文出现，不然url转码成url编码后长度会超过<code>labels</code>的50个字符限制</p>
+</blockquote>
+<h3 id="调整gitalk样式">调整gitalk样式</h3>
+<p>在自定义样式表中添加样式<br>
+文件路径：<code>themes\Chic\source\css\custom.styl</code></p>
+<pre><code>// Gitalk评论样式
+.gt-container {
+    max-width: 780px;
+    margin: auto;
+}
+</code></pre>
+<h2 id="其他问题">其他问题</h2>
+<h3 id="在page页引入gitalk">在page页引入gitalk</h3>
+<p>在<code>themes\Chic\layout\page.ejs</code>文件中添加：</p>
+<pre><code>&lt;% if (theme.gitalk.enable) { %&gt;
+    &lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;
+    &lt;%- partial('_plugins/gitalk') %&gt;
+&lt;% } %&gt;
+</code></pre>
+<h3 id="解决labels的50个字符长度限制问题">解决labels的50个字符长度限制问题</h3>
+<p>前面提到中文路径的页面ID会在issues中将中文转换成url编码，那么长度就会超过50个字符</p>
+<h4 id="将中文id转换成md5值">将中文ID转换成MD5值</h4>
+<h5 id="修改gitalkejs">修改gitalk.ejs</h5>
+<ul>
+<li>在<code>gitalk.ejs</code>中开头部分添加对<code>md5.js</code>的引用：</li>
+</ul>
+<pre><code>&lt;script src=&quot;//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<ul>
+<li>修改页面ID</li>
+</ul>
+<pre><code>id: md5(&lt;%= theme.gitalk.ID %&gt;),
+修改后的gitalk.ejs&lt;link rel=&quot;stylesheet&quot; href=&quot;//unpkg.com/gitalk/dist/gitalk.css&quot;&gt;
+&lt;script src=&quot;//unpkg.com/gitalk/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js&quot;&gt;&lt;/script&gt;
+&lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+      var gitalk = new Gitalk({
+        clientID: '&lt;%= theme.gitalk.ClientID %&gt;',
+        clientSecret: '&lt;%= theme.gitalk.ClientSecret %&gt;',
+        repo: '&lt;%= theme.gitalk.repo %&gt;',
+        owner: '&lt;%= theme.gitalk.owner %&gt;',
+        admin: '&lt;%= theme.gitalk.adminUser %&gt;',
+        id: md5(&lt;%= theme.gitalk.ID %&gt;),      
+        labels: '&lt;%= theme.gitalk.labels %&gt;'.split(',').filter(l =&gt; l),
+        perPage: &lt;%= theme.gitalk.perPage %&gt;,
+        pagerDirection: '&lt;%= theme.gitalk.pagerDirection %&gt;',
+        createIssueManually: &lt;%= theme.gitalk.createIssueManually %&gt;,
+        distractionFreeMode: &lt;%= theme.gitalk.distractionFreeMode %&gt;
+      })
+      gitalk.render('gitalk-container')
+&lt;/script&gt;
+</code></pre>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81">前情提要</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95">解决办法</a></li>
+<li><a href="#%E5%90%8E%E8%AE%B0">后记</a>
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AEgitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F">配置gitalk评论系统</a>
+<ul>
+<li><a href="#%E5%A2%9E%E5%8A%A0gitalkejs%E6%96%87%E4%BB%B6">增加gitalk.ejs文件</a></li>
+<li><a href="#%E5%BC%95%E5%85%A5gitalk">引入gitalk</a></li>
+</ul>
+</li>
+<li><a href="#%E9%85%8D%E7%BD%AE_configyml">配置_config.yml</a>
+<ul>
+<li><a href="#%E8%8E%B7%E5%8F%96client_id-%E5%92%8C-client_secret">获取client_id 和 client_secret</a></li>
+<li><a href="#%E5%9C%A8%E4%B8%BB%E9%A2%98_configyml%E4%B8%AD%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE">在主题<code>_config.yml</code>中添加配置</a></li>
+<li><a href="#%E8%B0%83%E6%95%B4gitalk%E6%A0%B7%E5%BC%8F">调整gitalk样式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98">其他问题</a>
+<ul>
+<li><a href="#%E5%9C%A8page%E9%A1%B5%E5%BC%95%E5%85%A5gitalk">在page页引入gitalk</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3labels%E7%9A%8450%E4%B8%AA%E5%AD%97%E7%AC%A6%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E9%97%AE%E9%A2%98">解决labels的50个字符长度限制问题</a>
+<ul>
+<li><a href="#%E5%B0%86%E4%B8%AD%E6%96%87id%E8%BD%AC%E6%8D%A2%E6%88%90md5%E5%80%BC">将中文ID转换成MD5值</a>
+<ul>
+<li><a href="#%E4%BF%AE%E6%94%B9gitalkejs">修改gitalk.ejs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"d0daf7e54e998a449b14",clientSecret:"c50102f10b18bacd88feb38adb6299f17963b862",repo:"mrlu997.github.io",owner:"mrlu997",admin:["mrlu997"],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script>
+	  
+		  
+	  
+
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+</script>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="3160799@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright"><footer>
+  <p>博客成立于 <span id="blog-establish-date"></span></p>
+</footer>
+
+<script>
+  // 获取当前日期
+  var currentDate = new Date();
+  
+  // 设置博客成立日期（假设为2020年1月1日）
+  var establishDate = new Date("2023-07-17");
+  
+  // 计算博客成立的天数
+  var daysSinceEstablishment = Math.floor((currentDate - establishDate) / (1000 * 60 * 60 * 24));
+  
+  // 显示博客成立时间
+  document.getElementById("blog-establish-date").textContent = establishDate.toLocaleDateString() + "（已运行 " + daysSinceEstablishment + " 天）";
+</script>Copyright © 2023- <a href="https://blog.maxlu.top" style="margin:0;">MrLu&#39;s Blog</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>31</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://blog.maxlu.top/media/js/prism.js"></script>
+</body>
+</html>
